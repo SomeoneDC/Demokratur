@@ -51,13 +51,12 @@ public class SuMAnwendung extends EBAnwendung
     {
        int lZufall;
        int lProzentRot = hatTextfeldRote.inhaltAlsGanzeZahl();
-       Buntstift stift = new Buntstift(); 
        for(int i = 0; i < 50; i++)
        for(int j = 0; j < 50; i++)
        {lZufall = hatRechner.ganzeZufallszahl(1, 100);
-        hatPerson[i][j] = new Person(210 + i *  12, 40 + j * 12, lZufall <= lProzentRot, stift);
+        hatPerson[i][j] = new Person(210 + i *  12, 40 + j * 12, lZufall <= lProzentRot);
     }
-        zSimuliert = true;
+    zSimuliert = true;
        
     }
 
@@ -69,7 +68,7 @@ public class SuMAnwendung extends EBAnwendung
     {
         //    Schreiben Sie hier den Text ihres Dienstes
     }
-    /*public void bearbeiteLeerlauf()
+    public void bearbeiteLeerlauf()
     {
         int 11H, 11V, 12H, 12V;
         
@@ -84,5 +83,5 @@ public class SuMAnwendung extends EBAnwendung
                 case 1: 12H = 11H -1; 12V = 11V - 1; 
                 break;
                 case 2: 12H
-*/
+
 }
