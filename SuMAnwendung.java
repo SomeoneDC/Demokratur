@@ -45,7 +45,7 @@ public class SuMAnwendung extends EBAnwendung
         hatKnopfBeenden = new Knopf(150, 230, 100, 25, "Beenden");
         hatKnopfBeenden.setzeBearbeiterGeklickt("hatKnopfBeendenGeklickt");
         hatRechner = new Rechner();
-        hatPerson = new Person[50][50];
+        hatPerson = new Person[20][20];
     }
 
     /**
@@ -57,8 +57,8 @@ public class SuMAnwendung extends EBAnwendung
        int lZufall;
        int lProzentRot = hatTextfeldRote.inhaltAlsGanzeZahl();
        Buntstift stift = new Buntstift();
-       for(int i = 0; i < 50; i++)
-       for(int j = 0; j < 50; i++)
+       for(int i = 0; i < 20; i++)
+       for(int j = 0; j < 20; i++)
        {lZufall = hatRechner.ganzeZufallszahl(1, 100);
         hatPerson[i][j] = new Person(210 + i *  12, 40 + j * 12, lZufall <= lProzentRot, stift);
        }
@@ -80,8 +80,8 @@ public class SuMAnwendung extends EBAnwendung
         int lUeberzeuger;
         if (zSimuliert)
         {
-            l1H = hatRechner.ganzeZufallszahl(0, 49);
-            l1V = hatRechner.ganzeZufallszahl(0, 49);
+            l1H = hatRechner.ganzeZufallszahl(0, 19);
+            l1V = hatRechner.ganzeZufallszahl(0, 19);
             l2H = 0; l2V = 0;
             
             switch(hatRechner.ganzeZufallszahl(1,8))
@@ -104,7 +104,7 @@ public class SuMAnwendung extends EBAnwendung
                 break;
 
             }
-            if (l2H >= 0 && l2H < 50 && l2V>= 0 && l2V <50)
+            if (l2H >= 0 && l2H < 20 && l2V>= 0 && l2V < 20)
             {
                 if(hatPerson[l1H][l1V].istRot() != hatPerson[l2H][l2V].istRot())
                 {
