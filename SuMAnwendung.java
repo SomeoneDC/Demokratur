@@ -17,6 +17,9 @@ public class SuMAnwendung extends EBAnwendung
     private Textfeld hatTextfeldRote;
     private Knopf hatKnopfUeberzeugen;
     private Knopf hatKnopfBeenden;
+    private boolean zSimuliert;
+    private Rechner hatRechner;
+    private Person[][] hatPerson;
 
     // Attribute
 
@@ -41,22 +44,25 @@ public class SuMAnwendung extends EBAnwendung
         hatKnopfUeberzeugen.setzeBearbeiterGeklickt("hatKnopfUeberzeugenGeklickt");
         hatKnopfBeenden = new Knopf(150, 230, 100, 25, "Beenden");
         hatKnopfBeenden.setzeBearbeiterGeklickt("hatKnopfBeendenGeklickt");
+        hatRechner = new Rechner();
+        hatPerson = new Person[50][50];
     }
 
-/**
- * Vorher: Ereignis GeklicktvonhatKnopfUeberzeugen fand statt.
- * Nachher: (schreiben Sie, was in dieser Methode ausgefuehrt wird)
- */
+    /**
+    * Vorher: Ereignis GeklicktvonhatKnopfUeberzeugen fand statt.
+    * Nachher: Die Felder sind erzeugt
+    */
     public void hatKnopfUeberzeugenGeklickt()
     {
        int lZufall;
        int lProzentRot = hatTextfeldRote.inhaltAlsGanzeZahl();
+       Buntstift stift = new Buntstift();
        for(int i = 0; i < 50; i++)
        for(int j = 0; j < 50; i++)
        {lZufall = hatRechner.ganzeZufallszahl(1, 100);
-        hatPerson[i][j] = new Person(210 + i *  12, 40 + j * 12, lZufall <= lProzentRot);
-    }
-    zSimuliert = true;
+        hatPerson[i][j] = new Person(210 + i *  12, 40 + j * 12, lZufall <= lProzentRot, stift);
+       }
+       zSimuliert = true;
        
     }
 
@@ -70,48 +76,45 @@ public class SuMAnwendung extends EBAnwendung
     }
     public void bearbeiteLeerlauf()
     {
-        int l1H, l1H, l2H, l2V;
-        
+        int l1H, l1V, l2H, l2V;
+        int lUeberzeuger;
         if (zSimuliert)
         {
             l1H = hatRechner.ganzeZufallszahl(0, 49);
-            l1H = hatRechner.ganzeZufallszahl(0, 49);
+            l1V = hatRechner.ganzeZufallszahl(0, 49);
             l2H = 0; l2V = 0;
             
             switch(hatRechner.ganzeZufallszahl(1,8))
             {
-                case 1: l2H = l1H -1; l2V = l1H - 1; 
+                case 1: l2H = l1H -1; l2V = l1V - 1; 
                 break;
-                case 2: l2H = l1H; l2V = l1H-1;
+                case 2: l2H = l1H; l2V = l1V-1;
                 break;
-                case 3: l2H = l1H + 1; l2V = l1H - 1;
+                case 3: l2H = l1H + 1; l2V = l1V - 1;
                 break;
-                case 4: l2H = l1H - 1; l2V = l1H;
+                case 4: l2H = l1H - 1; l2V = l1V;
                 break;
-                case 5: l2H = l1H + 1; l2V = l1H;
+                case 5: l2H = l1H + 1; l2V = l1V;
                 break;
-                case 6: l2H = l1H - 1; l2V = l1H + 1;
+                case 6: l2H = l1H - 1; l2V = l1V + 1;
                 break;
-                case 7: l2H = l1H; l2V = l1H + 1;
+                case 7: l2H = l1H; l2V = l1V + 1;
                 break;
-                case 8: l2H = l1H + 1; l2V = l1H +1;
+                case 8: l2H = l1H + 1; l2V = l1V +1;
                 break;
 
             }
-    if (l2H >= 0 && l2H < 50 && l2V>= 0 && l2V <50)
-    {
-    if(hatPerson[l1H][l1H].istRot()
-    != hatPerson[l2H][l2V].istRot())
-    {
-       lUeberzeuger = hatRechner.ganzeZufallszahl(0, 1);
-       if (lUeberzeuger == 0)
-       hatPerson[l1H][l1V].setzeRot
-       (hatPerson[l2H][l2V].istRot());
-       else
-       hatPerson[l2H][l2V].setzeRot
-       (hatPerson[l1H][l1V].istRot());
-    }
-                   }
-  }
+            if (l2H >= 0 && l2H < 50 && l2V>= 0 && l2V <50)
+            {
+                if(hatPerson[l1H][l1V].istRot() != hatPerson[l2H][l2V].istRot())
+                {
+                    lUeberzeuger = hatRechner.ganzeZufallszahl(0, 1);
+                    if (lUeberzeuger == 0)
+                        hatPerson[l1H][l1V].setzeRot(hatPerson[l2H][l2V].istRot());
+                    else
+                        hatPerson[l2H][l2V].setzeRot(hatPerson[l1H][l1V].istRot());
+                }
+            }
+        }
 }
 }
