@@ -82,6 +82,12 @@ public class SuMAnwendung extends EBAnwendung
             {
                 case 1: 12H = 11H -1; 12V = 11V - 1; 
                 break;
-                case 2: 12H
+                case 2: 12H = 11H; 12V = 11V-1;
+                break;
+                case 3: 12H = 11H + 1; 12V = 11V - 1;
+                break;
+                case 4: 12H = 11H -1; 12V = 11V;
+                break;
+                case 4: 12H = 11H -1; 12V = 11V;
 
 }
