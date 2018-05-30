@@ -70,33 +70,36 @@ public class SuMAnwendung extends EBAnwendung
     }
     public void bearbeiteLeerlauf()
     {
-        int 11H, 11V, 12H, 12V;
+        int l1H, l1H, l2H, l2V;
         
         if (zSimuliert)
         {
-            11H = hatRechner.ganzeZufallszahl(0, 49);
-            11V = hatRechner.ganzeZufallszahl(0, 49);
-            12H = 0; 12V = 0;
+            l1H = hatRechner.ganzeZufallszahl(0, 49);
+            l1H = hatRechner.ganzeZufallszahl(0, 49);
+            l2H = 0; l2V = 0;
             
             switch(hatRechner.ganzeZufallszahl(1,8))
             {
-                case 1: 12H = 11H -1; 12V = 11V - 1; 
+                case 1: l2H = l1H -1; l2V = l1H - 1; 
                 break;
-                case 2: 12H = 11H; 12V = 11V-1;
+                case 2: l2H = l1H; l2V = l1H-1;
                 break;
-                case 3: 12H = 11H + 1; 12V = 11V - 1;
+                case 3: l2H = l1H + 1; l2V = l1H - 1;
                 break;
-                case 4: 12H = 11H - 1; 12V = 11V;
+                case 4: l2H = l1H - 1; l2V = l1H;
                 break;
-                case 5: 12H = 11H + 1; 12V = 11V;
+                case 5: l2H = l1H + 1; l2V = l1H;
                 break;
-                case 6: 12H = 11H - 1; 12V = 11V + 1;
+                case 6: l2H = l1H - 1; l2V = l1H + 1;
                 break;
-                case 7: 12H = 11H; 12V = 11V + 1;
+                case 7: l2H = l1H; l2V = l1H + 1;
                 break;
-                case 8: 12H = 11H + 1; 12V = 11V +1;
+                case 8: l2H = l1H + 1; l2V = l1H +1;
                 break;
 
 }
-if (12H >= 0 && 12H < 50 && 12V>= 0 && 12V <50)
+if (l2H >= 0 && l2H < 50 && l2V>= 0 && l2V <50)
 {
+    if(hatPerson[l1H][l1H].istRot()
+    != hatPerson[l2H][l2V].istRot())
+    {
