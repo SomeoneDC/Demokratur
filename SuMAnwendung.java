@@ -97,9 +97,21 @@ public class SuMAnwendung extends EBAnwendung
                 case 8: l2H = l1H + 1; l2V = l1H +1;
                 break;
 
-}
-if (l2H >= 0 && l2H < 50 && l2V>= 0 && l2V <50)
-{
+            }
+    if (l2H >= 0 && l2H < 50 && l2V>= 0 && l2V <50)
+    {
     if(hatPerson[l1H][l1H].istRot()
     != hatPerson[l2H][l2V].istRot())
     {
+       lUeberzeuger = hatRechner.ganzeZufallszahl(0, 1);
+       if (lUeberzeuger == 0)
+       hatPerson[l1H][l1V].setzeRot
+       (hatPerson[l2H][l2V].istRot());
+       else
+       hatPerson[l2H][l2V].setzeRot
+       (hatPerson[l1H][l1V].istRot());
+    }
+                   }
+  }
+}
+}
