@@ -98,3 +98,5 @@ public class SuMAnwendung extends EBAnwendung
                 break;
 
 }
+if (12H >= 0 && 12H < 50 && 12V>= 0 && 12V <50)
+{
