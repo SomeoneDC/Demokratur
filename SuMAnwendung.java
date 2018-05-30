@@ -14,7 +14,7 @@ public class SuMAnwendung extends EBAnwendung
     // Objekte
     private Etikett hatEtikettDemokratur;
     private Etikett hatEtikettProzentsatzRote;
-    private Textfeld hatTextfeld1;
+    private Textfeld hatTextfeldRote;
     private Knopf hatKnopfUeberzeugen;
     private Knopf hatKnopfBeenden;
 
@@ -34,10 +34,10 @@ public class SuMAnwendung extends EBAnwendung
         hatEtikettProzentsatzRote = new Etikett(150, 170, 100, 25, "Prozentsatz Rote");
         // Ausrichtung
         hatEtikettProzentsatzRote.setzeAusrichtung(Ausrichtung.LINKS);
-        hatTextfeld1 = new Textfeld(250, 170, 100, 25, "");
+        hatTextfeldRote = new Textfeld(250, 170, 100, 25, "");
         // Ausrichtung
-        hatTextfeld1.setzeAusrichtung(Ausrichtung.LINKS);
-        hatKnopfUeberzeugen = new Knopf(150, 200, 100, 25, "�berzeugen");
+        hatTextfeldRote.setzeAusrichtung(Ausrichtung.LINKS);
+        hatKnopfUeberzeugen = new Knopf(150, 200, 100, 25, "Ueberzeugen");
         hatKnopfUeberzeugen.setzeBearbeiterGeklickt("hatKnopfUeberzeugenGeklickt");
         hatKnopfBeenden = new Knopf(150, 230, 100, 25, "Beenden");
         hatKnopfBeenden.setzeBearbeiterGeklickt("hatKnopfBeendenGeklickt");
@@ -49,7 +49,15 @@ public class SuMAnwendung extends EBAnwendung
  */
     public void hatKnopfUeberzeugenGeklickt()
     {
-        //    Schreiben Sie hier den Text ihres Dienstes
+       int lZufall;
+       int lProzentRot = hatTextfeldRote.inhaltAlsGanzeZahl();
+       for(int i = 0; i < 50; i++)
+       for(int j = 0; j < 50; i++)
+       {lZufall = hatRechner.ganzeZufallszahl(1, 100);
+        hatPerson[i][j] = new Person(210 + i *  12, 40 + j * 12, lZufall <= lProzentRot);
+    }
+    zSimuliert = true;
+       
     }
 
 /**
@@ -60,5 +68,20 @@ public class SuMAnwendung extends EBAnwendung
     {
         //    Schreiben Sie hier den Text ihres Dienstes
     }
+    public void bearbeiteLeerlauf()
+    {
+        int 11H, 11V, 12H, 12V;
+        
+        if (zSimuliert)
+        {
+            11H = hatRechner.ganzeZufallszahl(0, 49);
+            11V = hatRechner.ganzeZufallszahl(0, 49);
+            12H = 0; 12V = 0;
+            
+            switch(hatRechner.ganzeZufallszahl(1,8))
+            {
+                case 1: 12H = 11H -1; 12V = 11V - 1; 
+                break;
+                case 2: 12H
 
 }
