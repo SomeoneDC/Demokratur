@@ -20,6 +20,8 @@ public class SuMAnwendung extends EBAnwendung implements Runnable
     private boolean zSimuliert;
     private Rechner hatRechner;
     private Person[][] hatPerson;
+    private Thread t;
+    private final int size = 100;
 
     // Attribute
 
@@ -30,26 +32,28 @@ public class SuMAnwendung extends EBAnwendung implements Runnable
     {
         //Initialisierung der Oberklasse
         super(1699, 980);
+        
 
-        hatEtikettDemokratur = new Etikett(256, 96, 100, 25, "Demokratur");
+        hatEtikettDemokratur = new Etikett(256, 10, 100, 25, "Demokratur");
         hatEtikettDemokratur.setzeAusrichtung(Ausrichtung.LINKS);
         
-        hatEtikettProzentsatzRote = new Etikett(150, 170, 100, 25, "Prozentsatz Rote");
+        hatEtikettProzentsatzRote = new Etikett(50, 170, 100, 25, "Prozentsatz Rote");
         hatEtikettProzentsatzRote.setzeAusrichtung(Ausrichtung.LINKS);
         
-        hatTextfeldRote = new Textfeld(250, 170, 100, 25, "");
+        hatTextfeldRote = new Textfeld(50, 170, 100, 25, "");
         hatTextfeldRote.setzeAusrichtung(Ausrichtung.LINKS);
+        hatTextfeldRote.setzeInhalt("Prozentanteil Rot");
         
-        hatKnopfUeberzeugen = new Knopf(150, 200, 100, 25, "Ueberzeugen");
+        hatKnopfUeberzeugen = new Knopf(50, 200, 100, 25, "Ueberzeugen");
         hatKnopfUeberzeugen.setzeBearbeiterGeklickt("hatKnopfUeberzeugenGeklickt");
         
-        hatKnopfBeenden = new Knopf(150, 230, 100, 25, "Beenden");
+        hatKnopfBeenden = new Knopf(50, 230, 100, 25, "Beenden");
         hatKnopfBeenden.setzeBearbeiterGeklickt("hatKnopfBeendenGeklickt");
         
         hatRechner = new Rechner();
-        hatPerson = new Person[20][20];
+        hatPerson = new Person[size][size];
         
-        Thread t = new Thread(this);
+        t = new Thread(this);
         t.start();
 
     }
@@ -58,7 +62,7 @@ public class SuMAnwendung extends EBAnwendung implements Runnable
         while(true) {
             try {
                 this.bearbeiteLeerlauf();
-                Thread.sleep(1000);
+                Thread.sleep(10);
             } catch (InterruptedException e) {
                 
             }
@@ -76,15 +80,16 @@ public void hatKnopfUeberzeugenGeklickt()
        int l1H, l1V, l2H, l2V;
        int lUeberzeuger;
        Buntstift stift = new Buntstift();
-       for(int i = 0; i < 20; i++)
-       for(int j = 0; j < 20; j++)
+       stift.setzeFuellmuster(Muster.GEFUELLT);
+       for(int i = 0; i < size; i++)
+       for(int j = 0; j < size; j++)
        {
            lZufall = hatRechner.ganzeZufallszahl(1, 100);
            hatPerson[i][j] = new Person(210 + i *  12, 40 + j * 12, lZufall <= lProzentRot, stift);
        }
        
        zSimuliert = true;
-       while(true) {
+       /* while(true) {
            if (zSimuliert)
            {
                 l1H = hatRechner.ganzeZufallszahl(0, 19);
@@ -127,8 +132,8 @@ public void hatKnopfUeberzeugenGeklickt()
             Thread.sleep(1000);
            } catch (InterruptedException e) {
             }
-        }
-}
+        } */
+} 
 
 /**
  * Vorher: Ereignis GeklicktvonhatKnopfBeenden fand statt.
@@ -137,6 +142,8 @@ public void hatKnopfUeberzeugenGeklickt()
     public void hatKnopfBeendenGeklickt()
     {
         //    Schreiben Sie hier den Text ihres Dienstes
+        t.stop();
+        this.beenden();
     }
     public void bearbeiteLeerlauf()
     {
@@ -144,8 +151,8 @@ public void hatKnopfUeberzeugenGeklickt()
         int lUeberzeuger;
         if (zSimuliert)
         {
-            l1H = hatRechner.ganzeZufallszahl(0, 19);
-            l1V = hatRechner.ganzeZufallszahl(0, 19);
+            l1H = hatRechner.ganzeZufallszahl(0, size-1);
+            l1V = hatRechner.ganzeZufallszahl(0, size-1);
             l2H = 0; l2V = 0;
             
             switch(hatRechner.ganzeZufallszahl(1,8))
@@ -168,7 +175,7 @@ public void hatKnopfUeberzeugenGeklickt()
                 break;
 
             }
-            if (l2H >= 0 && l2H < 20 && l2V>= 0 && l2V < 20)
+            if (l2H >= 0 && l2H < size && l2V>= 0 && l2V < size)
             {
                 if(hatPerson[l1H][l1V].istRot() != hatPerson[l2H][l2V].istRot())
                 {

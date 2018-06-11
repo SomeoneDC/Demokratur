@@ -24,11 +24,14 @@ public class Person
     }
     
     protected void zeichne() {
+        stift.setzeFarbe(Farbe.WEISS);
+        stift.bewegeBis(pH, pV);
+        stift.zeichneKreis(5);
         if (istRot == true)
             stift.setzeFarbe(Farbe.ROT);
         else
-            stift.setzeFarbe(Farbe.ROT);
-        stift.bewegeBis(pH, pV);
+            stift.setzeFarbe(Farbe.SCHWARZ);
+        
         stift.zeichneKreis(5);
     }
     
