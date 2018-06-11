@@ -11,6 +11,7 @@ public class Person
     private boolean istRot;
     private Buntstift stift;
     int pH, pV;
+    private final int mode = 1;
     /**
      * Constructor for objects of class Person
      */
@@ -21,6 +22,14 @@ public class Person
         this.stift = stift;
         this.istRot = istRot;
         this.zeichne();
+    }
+    public Person (int pH, int pV, int party, Bundstift stift)
+    {   this.pH = pH;
+        this.pV = pV;
+        this.stift = stift;
+        this.party = party;
+        this.zeichne();
+        
     }
     
     protected void zeichne() {
