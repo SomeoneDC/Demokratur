@@ -20,8 +20,10 @@ public class SuMAnwendung extends EBAnwendung implements Runnable
     private boolean zSimuliert;
     private Rechner hatRechner;
     private Person[][] hatPerson;
-    private Thread t;
+    private Thread t, t1, t2, t3;
     private final int size = 100;
+    private final int mode = 1;
+  
 
     // Attribute
 
@@ -55,6 +57,12 @@ public class SuMAnwendung extends EBAnwendung implements Runnable
         
         t = new Thread(this);
         t.start();
+        //t1 = new Thread(this);
+        //t1.start();
+        //t2 = new Thread(this);
+        //t2.start();
+        //t3 = new Thread(this);
+        //t3.start();
 
     }
 
@@ -62,7 +70,7 @@ public class SuMAnwendung extends EBAnwendung implements Runnable
         while(true) {
             try {
                 this.bearbeiteLeerlauf();
-                Thread.sleep(10);
+                Thread.sleep(1);
             } catch (InterruptedException e) {
                 
             }
@@ -75,7 +83,7 @@ public class SuMAnwendung extends EBAnwendung implements Runnable
 */
 public void hatKnopfUeberzeugenGeklickt()
 {
-       int lZufall;
+       int lZufall, state;
        int lProzentRot = hatTextfeldRote.inhaltAlsGanzeZahl();
        int l1H, l1V, l2H, l2V;
        int lUeberzeuger;
@@ -85,7 +93,21 @@ public void hatKnopfUeberzeugenGeklickt()
        for(int j = 0; j < size; j++)
        {
            lZufall = hatRechner.ganzeZufallszahl(1, 100);
-           hatPerson[i][j] = new Person(210 + i *  12, 40 + j * 12, lZufall <= lProzentRot, stift);
+           switch (mode) {
+               case 1:
+               hatPerson[i][j] = new Person(210 + i *  12, 40 + j * 12, lZufall <= lProzentRot, stift);
+               break;
+               default:
+               if (lZufall <= 25)
+                    party = 1;
+               else if (lZufall <= 50 && lZufall > 25)
+                    party = 2;
+               else if (lZufall <= 75 && lZufall > 50)
+                    party = 3;
+               else
+                    party = 4;
+               hatPerson[i][j] = new Person(210 + i *  12, 40 + j * 12, party, stift);
+           }
        }
        
        zSimuliert = true;
