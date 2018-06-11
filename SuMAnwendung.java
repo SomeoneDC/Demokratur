@@ -58,7 +58,7 @@ public class SuMAnwendung extends EBAnwendung
        int lProzentRot = hatTextfeldRote.inhaltAlsGanzeZahl();
        Buntstift stift = new Buntstift();
        for(int i = 0; i < 20; i++)
-       for(int j = 0; j < 20; i++)
+       for(int j = 0; j < 20; j++)
        {lZufall = hatRechner.ganzeZufallszahl(1, 100);
         hatPerson[i][j] = new Person(210 + i *  12, 40 + j * 12, lZufall <= lProzentRot, stift);
        }
