@@ -28,9 +28,9 @@ public class Person
         stift.bewegeBis(pH, pV);
         stift.zeichneKreis(5);
         if (istRot == true)
-            stift.setzeFarbe(Farbe.MAGENTA);
+            stift.setzeFarbe(Farbe.ROT);
         else
-            stift.setzeFarbe(Farbe.CYAN);
+            stift.setzeFarbe(Farbe.SCHWARZ);
         
         stift.zeichneKreis(5);
     }
