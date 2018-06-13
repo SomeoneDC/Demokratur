@@ -23,7 +23,7 @@ import sum.ereignis.*;
  * @author (your name)
  * @version (a version number or a date)
  */
-public class Anwendung extends Application
+public class Anwendung extends Application implements Runnable
 {
     // We keep track of the count, and label displaying the count:
     private GridPane pane;
@@ -31,8 +31,8 @@ public class Anwendung extends Application
     
     private boolean zSimuliert;
     private Rechner hatRechner;
-    private Person[][] hatPerson;
-    private Thread t, t1, t2, t3;
+    Person[][] hatPerson;
+    private Thread updater;
     private final int size = 100;
     private final int mode = 1;
     
@@ -45,6 +45,9 @@ public class Anwendung extends Application
         
         hatPerson = new Person[size][size];
         hatRechner = new Rechner();
+        
+        updater = new Thread(this);
+        updater.start();
         
         //Toolbar
         ToolBar toolbar_actions = new ToolBar();
@@ -66,6 +69,7 @@ public class Anwendung extends Application
 
         //set an action on the button using method reference
         btnStart.setOnAction(this::buttonClick);
+        btnStop.setOnAction(this::btnStopClick);
 
         // Add the button and label into the pane
         toolbar_actions.getItems().addAll(new Separator(), lbPercent, txtPercent, new Separator(), btnStart, new Separator(), btnStop);
@@ -85,6 +89,17 @@ public class Anwendung extends Application
 
         // Show the Stage (window)
         stage.show();
+    }
+    
+    public void run() {
+        while(true) {
+            try { 
+            this.bearbeiteLeerlauf();
+             Thread.sleep(1);
+            } catch (Exception e) {
+                
+            }
+        }
     }
 
     /**
@@ -107,5 +122,59 @@ public class Anwendung extends Application
            
        }
        
+    }
+    
+    /**
+     * This will be executed when the button is clicked
+     * It increments the count by 1
+     */
+    private void btnStopClick(ActionEvent event)
+    {
+       updater.stop();
+       Platform.exit();
+    }
+    
+    public void bearbeiteLeerlauf()
+    {
+        int l1H, l1V, l2H, l2V;
+        int lUeberzeuger;
+        if (zSimuliert)
+        {
+            l1H = hatRechner.ganzeZufallszahl(0, size-1);
+            l1V = hatRechner.ganzeZufallszahl(0, size-1);
+            l2H = 0; l2V = 0;
+            
+            switch(hatRechner.ganzeZufallszahl(1,8))
+            {
+                case 1: l2H = l1H -1; l2V = l1V - 1; 
+                break;
+                case 2: l2H = l1H; l2V = l1V-1;
+                break;
+                case 3: l2H = l1H + 1; l2V = l1V - 1;
+                break;
+                case 4: l2H = l1H - 1; l2V = l1V;
+                break;
+                case 5: l2H = l1H + 1; l2V = l1V;
+                break;
+                case 6: l2H = l1H - 1; l2V = l1V + 1;
+                break;
+                case 7: l2H = l1H; l2V = l1V + 1;
+                break;
+                case 8: l2H = l1H + 1; l2V = l1V +1;
+                break;
+
+            }
+            if (l2H >= 0 && l2H < size && l2V>= 0 && l2V < size)
+            {
+                if(hatPerson[l1H][l1V].istRot() != hatPerson[l2H][l2V].istRot())
+                {
+                    lUeberzeuger = hatRechner.ganzeZufallszahl(0, 1);
+                    if (lUeberzeuger == 0)
+                        hatPerson[l1H][l1V].setzeRot(hatPerson[l2H][l2V].istRot());
+                    else
+                        hatPerson[l2H][l2V].setzeRot(hatPerson[l1H][l1V].istRot());
+                }
+            }
+        }
     }
 }
