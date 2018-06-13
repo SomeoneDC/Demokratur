@@ -1,4 +1,16 @@
 import sum.ereignis.*;
+
+import javafx.application.*;
+import javafx.event.ActionEvent;
+import javafx.event.EventHandler;
+import javafx.scene.*;
+import javafx.geometry.Insets;
+import javafx.scene.control.*;
+import javafx.scene.layout.*;
+import javafx.stage.*;
+import javafx.geometry.*;
+import javafx.scene.shape.*;
+import javafx.scene.paint.*;
 /**
  * Write a description of class Person here.
  *
@@ -11,7 +23,9 @@ public class Person
     private boolean istRot;
     private Buntstift stift;
     int pH, pV;
+    private int party;
     private final int mode = 1;
+    private Rectangle rect;
     /**
      * Constructor for objects of class Person
      */
@@ -23,7 +37,20 @@ public class Person
         this.istRot = istRot;
         this.zeichne();
     }
-    public Person (int pH, int pV, int party, Bundstift stift)
+    
+    /**
+     * Constructor for objects of class Person
+     */
+    public Person(int pH, int pV, boolean istRot, GridPane pane)
+    {
+        this.pH = pH;
+        this.pV = pV;
+        this.istRot = istRot;
+        this.rect = new Rectangle(5, 5, (istRot) ? Color.RED : Color.BLACK);
+        pane.add(rect, pH, pV);
+    }
+    
+    public Person (int pH, int pV, int party, Buntstift stift)
     {   this.pH = pH;
         this.pV = pV;
         this.stift = stift;
@@ -50,6 +77,11 @@ public class Person
     
     public void setzeRot(boolean istRot) {
         this.istRot = istRot;
-        this.zeichne();
+        
+        if (rect != null) {
+            this.rect.setFill((istRot) ? Color.RED : Color.BLACK);
+        } else {
+            this.zeichne();
+        }
     }
 }
